@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\public",
+    "\\src",
+    "\\src\\components",
+    "\\src\\components\\App",
+    "\\src\\components\\itemlist",
+    "\\src\\components\\items",
+    "\\src\\components\\recipes",
+    "\\src\\components\\storefront",
+    "\\src\\components\\trolley"
+  ],
+  "SelectedNode": "\\src\\components\\itemlist\\itemlist.js",
+  "PreviewInSolutionExplorer": false
+}

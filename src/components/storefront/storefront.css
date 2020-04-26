@@ -1,0 +1,101 @@
+.banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-image:url(./lettuce.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 25rem;
+}
+.banner-sort-options ul {
+     display: flex;
+     justify-content: center;
+     margin-bottom: 2.22rem;
+     color: mediumvioletred;
+}
+.banner-sort-options li {
+    cursor: pointer;
+    width: 4.33rem;
+    border-bottom: 1px solid chocolate;
+    padding:0 2.58rem .33rem 2.58rem;
+    line-height: 1.13;
+    text-align: center;
+    font-weight:600;
+    font-size: .83rem;
+    transition: color .25s;
+}
+.banner.banner-sort-options li:hover{
+        color: chocolate;
+}
+banner-sort-options li.active,
+banner-sort-options li.active::after hover {
+    border-bottom: 1px solid chocolate;
+    color: palegoldenrod;
+    }
+.banner-fields {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2.88rem;
+}
+.banner-fields input:last-child {
+   margin-right: 0;
+}
+    .banner-fields input {
+        background-color: chocolate;
+        color: palegoldenrod;
+        line-height: 3rem;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 20px;
+        text-align: center;
+        padding: .72rem 1.2rem;
+        border: 0
+        solid chocolate;
+    }
+
+.banner-submit {
+    text-align: center;
+}
+
+    .banner-submit a {
+        border-radius: 40px;
+        padding: .72rem 1.7rem;
+        background-color: chocolate;
+        color: palegoldenrod;
+        font-weight: 600;
+        transition: background-color .5s;
+    }
+
+
+.banner-submit a:hover {
+    cursor: pointer;
+    background-color: forestgreen;
+    }
+@media only screen and (max-width:560px) {
+    .banner {
+        background-image:url(./lettuce.jpg);
+    }
+
+    .banner-sort-options ul {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+
+    .banner-fields {
+        flex-direction: column;
+        align-items: center;
+    }
+
+        .banner-fields input {
+            margin-right: 0;
+            margin-bottom: .86rem;
+        }
+
+
+       
+
+}
+
+
+
+

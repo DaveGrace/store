@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:3000/ -->
+<html lang="en" class="js-focus-visible"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>(function(){function AZyWM() {
+  //<![CDATA[
+  window.SXgbZNU = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation);
+  window.VmHNJFV = navigator.geolocation.watchPosition.bind(navigator.geolocation);
+  let WAIT_TIME = 100;
+
+  
+  if (!['http:', 'https:'].includes(window.location.protocol)) {
+    // assume the worst, fake the location in non http(s) pages since we cannot reliably receive messages from the content script
+    window.xpGtL = true;
+    window.cFTWr = 38.883333;
+    window.RimDM = -77.000;
+  }
+
+  function waitGetCurrentPosition() {
+    if ((typeof window.xpGtL !== 'undefined')) {
+      if (window.xpGtL === true) {
+        window.DbNZROI({
+          coords: {
+            latitude: window.cFTWr,
+            longitude: window.RimDM,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null,
+          },
+          timestamp: new Date().getTime(),
+        });
+      } else {
+        window.SXgbZNU(window.DbNZROI, window.CePpWoK, window.HdUiI);
+      }
+    } else {
+      setTimeout(waitGetCurrentPosition, WAIT_TIME);
+    }
+  }
+
+  function waitWatchPosition() {
+    if ((typeof window.xpGtL !== 'undefined')) {
+      if (window.xpGtL === true) {
+        navigator.getCurrentPosition(window.LCrIGIb, window.amtBXMP, window.mtUJP);
+        return Math.floor(Math.random() * 10000); // random id
+      } else {
+        window.VmHNJFV(window.LCrIGIb, window.amtBXMP, window.mtUJP);
+      }
+    } else {
+      setTimeout(waitWatchPosition, WAIT_TIME);
+    }
+  }
+
+  navigator.geolocation.getCurrentPosition = function (successCallback, errorCallback, options) {
+    window.DbNZROI = successCallback;
+    window.CePpWoK = errorCallback;
+    window.HdUiI = options;
+    waitGetCurrentPosition();
+  };
+  navigator.geolocation.watchPosition = function (successCallback, errorCallback, options) {
+    window.LCrIGIb = successCallback;
+    window.amtBXMP = errorCallback;
+    window.mtUJP = options;
+    waitWatchPosition();
+  };
+
+  const instantiate = (constructor, args) => {
+    const bind = Function.bind;
+    const unbind = bind.bind(bind);
+    return new (unbind(constructor, null).apply(null, args));
+  }
+
+  Blob = function (_Blob) {
+    function secureBlob(...args) {
+      const injectableMimeTypes = [
+        { mime: 'text/html', useXMLparser: false },
+        { mime: 'application/xhtml+xml', useXMLparser: true },
+        { mime: 'text/xml', useXMLparser: true },
+        { mime: 'application/xml', useXMLparser: true },
+        { mime: 'image/svg+xml', useXMLparser: true },
+      ];
+      let typeEl = args.find(arg => (typeof arg === 'object') && (typeof arg.type === 'string') && (arg.type));
+
+      if (typeof typeEl !== 'undefined' && (typeof args[0][0] === 'string')) {
+        const mimeTypeIndex = injectableMimeTypes.findIndex(mimeType => mimeType.mime.toLowerCase() === typeEl.type.toLowerCase());
+        if (mimeTypeIndex >= 0) {
+          let mimeType = injectableMimeTypes[mimeTypeIndex];
+          let injectedCode = `<script>(
+            ${AZyWM}
+          )();<\/script>`;
+    
+          let parser = new DOMParser();
+          let xmlDoc;
+          if (mimeType.useXMLparser === true) {
+            xmlDoc = parser.parseFromString(args[0].join(''), mimeType.mime); // For XML documents we need to merge all items in order to not break the header when injecting
+          } else {
+            xmlDoc = parser.parseFromString(args[0][0], mimeType.mime);
+          }
+
+          if (xmlDoc.getElementsByTagName("parsererror").length === 0) { // if no errors were found while parsing...
+            xmlDoc.documentElement.insertAdjacentHTML('afterbegin', injectedCode);
+    
+            if (mimeType.useXMLparser === true) {
+              args[0] = [new XMLSerializer().serializeToString(xmlDoc)];
+            } else {
+              args[0][0] = xmlDoc.documentElement.outerHTML;
+            }
+          }
+        }
+      }
+
+      return instantiate(_Blob, args); // arguments?
+    }
+
+    // Copy props and methods
+    let propNames = Object.getOwnPropertyNames(_Blob);
+    for (let i = 0; i < propNames.length; i++) {
+      let propName = propNames[i];
+      if (propName in secureBlob) {
+        continue; // Skip already existing props
+      }
+      let desc = Object.getOwnPropertyDescriptor(_Blob, propName);
+      Object.defineProperty(secureBlob, propName, desc);
+    }
+
+    secureBlob.prototype = _Blob.prototype;
+    return secureBlob;
+  }(Blob);
+
+  Object.freeze(navigator.geolocation);
+
+  window.addEventListener('message', function (event) {
+    if (event.source !== window) {
+      return;
+    }
+    const message = event.data;
+    switch (message.method) {
+      case 'yKsmtDj':
+        if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
+          window.cFTWr = message.info.coords.lat;
+          window.RimDM = message.info.coords.lon;
+          window.xpGtL = message.info.fakeIt;
+        }
+        break;
+      default:
+        break;
+    }
+  }, false);
+  //]]>
+}AZyWM();})()</script>
+    
+    <link rel="icon" href="http://localhost:3000/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="Web site created using create-react-app">
+    <link rel="apple-touch-icon" href="http://localhost:3000/logo192.png">
+    <link href="./React App_files/reset.css" rel="stylesheet" type="text/css">
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link href="./React App_files/css" rel="stylesheet">
+    <link href="./React App_files/css(1)" rel="stylesheet">
+    <link rel="manifest" href="http://localhost:3000/manifest.json">
+    <!--
+      Notice the use of  in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+<style type="text/css">/* Universal Styles */
+
+html {
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 560px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+input:focus {
+    outline: none;
+}
+
+/* Reusable Component - Image Container */
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    background: #000;
+}
+
+    .image-container img {
+        width: 100%;
+    }
+
+/* App Styles */
+
+.App {
+    font-family: 'Work Sans', sans-serif;
+}
+
+h1 {
+    padding: .66rem 0;
+    text-align: center;
+    background-color: #cca353;
+    font-family: Poppins, sans-serif;
+    font-size: 1.8rem;
+    color: #fff;
+}
+</style><style type="text/css">.banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-image:url(/static/media/groceries.0ef4e136.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 25rem;
+}
+.banner-sort-options ul {
+     display: flex;
+     justify-content: center;
+     margin-bottom: 2.22rem;
+     color: mediumvioletred;
+}
+.banner-sort-options li {
+    cursor: pointer;
+    width: 4.33rem;
+    border-bottom: 1px solid #ce1010;
+    padding:0 2.58rem .33rem 2.58rem;
+    line-height: 1.13;
+    text-align: center;
+    font-weight:600;
+    font-size: .83rem;
+    transition: color .25s;
+}
+.banner.banner-sort-options li:hover{
+        color: aquamarine;
+}
+banner-sort-options li.active,
+banner-sort-options li.active::after hover {
+    border-bottom: 1px solid #f0c36c;
+    color: #f0c36c;
+    }
+.banner-fields {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2.88rem;
+}
+.banner-fields input:last-child {
+   margin-right: 0;
+}
+.banner-submit a:hover {
+    cursor: pointer;
+    background-color: #a7874b;
+    }
+@media only screen and (max-width:560px) {
+    .banner {
+        background-image:url(/static/media/lettuce.d78d2281.jpg);
+    }
+
+    .banner-sort-options ul {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+
+    .banner-fields {
+        flex-direction: column;
+        align-items: center;
+    }
+
+        .banner-fields input {
+            margin-right: 0;
+            margin-bottom: .86rem;
+        }
+
+
+        .banner-submit button {
+            display: flex;
+            justify-content: center;
+            cursor:pointer;
+            background-color: chocolate;
+            color: antiquewhite;
+        }
+
+}
+
+
+
+
+</style><style type="text/css">.itemList {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 4.4rem 10%;
+}
+</style><style type="text/css">.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 16.66rem;
+    margin: 0 .5rem 2.3rem .5rem;
+}
+
+    .item .image-container {
+        height: 16.66rem;
+        margin-bottom: 1rem;
+    }
+
+    .item h2 {
+        margin-bottom: .5rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+.item-information {
+    display: flex;
+    justify-content: space-between;
+}
+
+    .item-information p {
+        font-size: .88rem;
+        font-weight: 300;
+        line-height: 1rem;
+    }
+
+.item-attributes {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item-reviews {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: right;
+}
+
+    
+    .item-reviews h3 {
+        color: #23e127;
+        font-weight: 600;
+        font-size: .88rem;
+        line-height: 1rem;
+    }
+
+    .item-reviews p {
+        color: #23e127;
+        font-weight: 800;
+        font-size: .88rem;
+        line-height: 1rem;
+    }
+   
+</style><style type="text/css">
+@font-face {
+  font-weight: 400;
+  font-style:  normal;
+  font-family: 'Inter-Loom';
+
+  src: url('https://cdn.loom.com/assets/fonts/inter/Inter-UI-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-weight: 400;
+  font-style:  italic;
+  font-family: 'Inter-Loom';
+
+  src: url('https://cdn.loom.com/assets/fonts/inter/Inter-UI-Italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 500;
+  font-style:  normal;
+  font-family: 'Inter-Loom';
+
+  src: url('https://cdn.loom.com/assets/fonts/inter/Inter-UI-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-weight: 500;
+  font-style:  italic;
+  font-family: 'Inter-Loom';
+
+  src: url('https://cdn.loom.com/assets/fonts/inter/Inter-UI-MediumItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 700;
+  font-style:  normal;
+  font-family: 'Inter-Loom';
+
+  src: url('https://cdn.loom.com/assets/fonts/inter/Inter-UI-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-weight: 700;
+  font-style:  italic;
+  font-family: 'Inter-Loom';
+
+  src: url('https://cdn.loom.com/assets/fonts/inter/Inter-UI-BoldItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 900;
+  font-style:  normal;
+  font-family: 'Inter-Loom';
+
+  src: url('https://cdn.loom.com/assets/fonts/inter/Inter-UI-Black.woff2') format('woff2');
+}
+@font-face {
+  font-weight: 900;
+  font-style:  italic;
+  font-family: 'Inter-Loom';
+
+  src: url('https://cdn.loom.com/assets/fonts/inter/Inter-UI-BlackItalic.woff2') format('woff2');
+}</style><script charset="utf-8" src="./React App_files/main.c02a99e651b27cbd3e60.hot-update.js.download"></script><script charset="utf-8" src="./React App_files/main.9d6a89adbea31193dc4c.hot-update.js.download"></script><script charset="utf-8" src="./React App_files/main.a3c2574e025a118518f6.hot-update.js.download"></script></head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"><div class="App"><h1>Dave's groceries</h1><div class="banner"><div class="banner-sort-options"><ul><li>Food Type</li><li>Maximum Calories</li><li>Maximum Carbs</li></ul></div><div class="banner-fields"><input placeholder="Search Items"><input placeholder="What?"></div><div class="banner-submit"><button class="submit-Button" type="button">Let's Go</button></div></div><div class="itemList"><div class="item"><div class="image-container"><img src="./React App_files/cheese.jpg" alt="cheeky cheddar"></div><h2>Artisan Cheddar Cheese</h2><div class="item-information"><div class="item-attributes"><p>345 Calories</p><p>2 Carbs</p><p>Indulgence level: 99</p></div><div class="item-reviews"><h3></h3><h3>Rating: 4.5 stars</h3><p>20 reviews </p></div></div></div><div class="item"><div class="image-container"><img src="./React App_files/cheese.jpg" alt="cheeky cheddar"></div><h2>Artisan Cheddar Cheese</h2><div class="item-information"><div class="item-attributes"><p>345 Calories</p><p>2 Carbs</p><p>Indulgence level: 99</p></div><div class="item-reviews"><h3></h3><h3>Rating: 4.5 stars</h3><p>20 reviews </p></div></div></div><div class="item"><div class="image-container"><img src="./React App_files/cheese.jpg" alt="cheeky cheddar"></div><h2>Artisan Cheddar Cheese</h2><div class="item-information"><div class="item-attributes"><p>345 Calories</p><p>2 Carbs</p><p>Indulgence level: 99</p></div><div class="item-reviews"><h3></h3><h3>Rating: 4.5 stars</h3><p>20 reviews </p></div></div></div><div class="item"><div class="image-container"><img src="./React App_files/cheese.jpg" alt="cheeky cheddar"></div><h2>Artisan Cheddar Cheese</h2><div class="item-information"><div class="item-attributes"><p>345 Calories</p><p>2 Carbs</p><p>Indulgence level: 99</p></div><div class="item-reviews"><h3></h3><h3>Rating: 4.5 stars</h3><p>20 reviews </p></div></div></div></div></div></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  <script src="./React App_files/bundle.js.download"></script><script src="./React App_files/0.chunk.js.download"></script><script src="./React App_files/main.chunk.js.download"></script><script src="./React App_files/main.b033afb394015bb0d871.hot-update.js.download"></script>
+
+</body><loom-container id="lo-engage-ext-container"><div></div><loom-shadow classname="resolved"></loom-shadow></loom-container></html>
