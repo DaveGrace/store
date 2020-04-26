@@ -1,9 +1,11 @@
 import React from 'react';
 import './items.css';
+import cheese from './cheese.jpg';
 
+console.log(cheese)
 const item = {
     
-    imageSrc: './cheese.jpg',
+    imageSrc: cheese,
     FoodType: 'Artisan Cheddar Cheese',
     description: " A cheeky little cheddar that likes to bite tongues and then settle down to a salty smoothness",
     MaximumCalories: 345,
