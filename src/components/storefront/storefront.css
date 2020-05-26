@@ -36,22 +36,29 @@ banner-sort-options li.active::after hover {
     display: flex;
     justify-content: center;
     margin-bottom: 2.88rem;
+    
 }
 .banner-fields input:last-child {
-   margin-right: 0;
+    color: palegoldenrod;
+    margin-right: 0;
 }
-    .banner-fields input {
-        background-color: chocolate;
-        color: palegoldenrod;
-        line-height: 3rem;
-        border-radius: 10px;
-        font-weight: 700;
-        font-size: 20px;
-        text-align: center;
-        padding: .72rem 1.2rem;
-        border: 0
-        solid chocolate;
-    }
+
+
+.banner-fields input {
+    background-color: chocolate;
+    color: palegoldenrod;
+    line-height: 3rem;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 20px;
+    text-align: center;
+    padding: .72rem 1.2rem;
+    border: 0 solid chocolate;
+}
+::-webkit-input-placeholder {
+    color: palegoldenrod;
+    background-color: chocolate;
+}
 
 .banner-submit {
     text-align: center;

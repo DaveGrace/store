@@ -1,19 +1,7 @@
 import React from 'react';
 import './items.css';
-import cheese from './cheese.jpg';
 
-console.log(cheese)
-const item = {
-    
-    imageSrc: cheese,
-    FoodType: 'Artisan Cheddar Cheese',
-    description: " A cheeky little cheddar that likes to bite tongues and then settle down to a salty smoothness",
-    MaximumCalories: 345,
-    MaximumCarbs: 2,        
-    rating: 4.5,
-    indulgence: 99,
-    reviewCount: 20
-};
+
 
 
 
@@ -22,26 +10,30 @@ class Items extends React.Component {
         return (
 
             < div className="item" >
-    <div className="image-container">
-                    <img src={item.imageSrc} alt='cheeky cheddar' />
-    </div>
-                <h2>{item.FoodType}</h2>
+                <div className="image-container" >
+                    <img src={this.props.item.imageSrc} alt='cheeky cheddar'  />
+                </div>
+                
+                <h2>{this.props.item.FoodType}</h2>
     <div className="item-information">
         <div className="item-attributes">
-                        <p>{`${item.MaximumCalories} Calories`}</p>
-                        <p>{`${item.MaximumCarbs} Carbs`}</p>
-                        <p>{`Indulgence level: ${item.indulgence}`}</p>
+                        <p>{`${this.props.item.MaximumCalories} Calories`}</p>
+                        <p>{`${this.props.item.MaximumCarbs} Carbs`}</p>
+                        <p>{`Indulgence level: ${this.props.item.indulgence}`}</p>
         </div>
         <div className="item-reviews">
-                        <h3>{item.name}</h3>
-                        <h3>{`Rating: ${item.rating} stars`}</h3>
-                        <p>{`${item.reviewCount} reviews`} </p>
+                        <h3>{this.props.item.name}</h3>
+                        <h3>{`Rating: ${this.props.item.rating} stars`}</h3>
+                        <p>{`${this.props.item.reviewCount} reviews`} </p>
         </div>
-    </div>
-</div>
+                </div>
+                
+                <div className="item-hiddenText"><p>{this.props.item.description}</p>
+                    </div>
+            </div>
+     
         )
     };
 }
 export default Items;
-
 

@@ -1,12 +1,12 @@
 .item {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     justify-content: space-between;
     width: 16.66rem;
     margin: 0 .5rem 2.3rem .5rem;
 }
 
-    .item .image-container {
+    .item .image-container  {
         height: 16.66rem;
         margin-bottom: 1rem;
     }
@@ -16,6 +16,16 @@
         font-size: 1.2rem;
         font-weight: 600;
     }
+
+    .item:hover .item-hiddenText {
+        display: block;
+        height: 10rem;
+        width: 16.6rem;
+    }
+
+.item-hiddenText {
+    display: none;
+}
 
 .item-information {
     display: flex;
@@ -55,4 +65,3 @@
         font-size: .88rem;
         line-height: 1rem;
     }
-   
