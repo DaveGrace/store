@@ -1,42 +1,166 @@
-import React from 'react';
-//import logo from './public/favicon';//
+import React, { PureComponent } from "react";
+import {
+    CartComponent,
+    ProductComponent,
+    CheckoutButtonComponent,
+    cartLocalization
+} from "react-shopping-cart";
+
+import "bootstrap/dist/css/bootstrap.css";
+import "animate.css/animate.min.css";
+import "font-awesome/css/font-awesome.min.css";
 import './App.css';
 import Banner from '../storefront/storefront';
 import ItemList from '../itemlist/itemlist.js'
 import cheese from './cheese.jpg';
 
-
-const item = {
-
-    imageSrc: cheese,
-    FoodType: 'Artisan Cheddar Cheese',
-    description: " A cheeky little cheddar that likes to bite tongues and then settle down to a salty smoothness",
-    MaximumCalories: 345,
-    MaximumCarbs: 2,
-    rating: 4.5,
-    indulgence: 99,
-    reviewCount: 20
+const { getDefaultLocalization } = cartLocalization;
+const iPadCaseLocalization = {
+    color: "Color",
+    iPadCase: "iPad case",
+    red: "Red",
+    green: "Green",
+    yellow: "Yellow",
+    GBP: "£",
+    EUR: "€",
+    USD: "$"
 };
 
-const items = [
-    item,
-    item,
-    item,
-    item,
-    item,
-    item,
+{/*const iPadPropertiesWithAdditionalCostLocalization = {
+    yellow: "Yellow (+{cost}{localizedCurrency})"
+};*/}
 
-];
+class App extends PureComponent {
+   
+    state = {
+        products: {},
+        product: {
+            name: "Artisan Cheddar",
+            id: "ipad-case",
+            path: './cheese',
+            properties: {
+                color: [
+                    "red",
+                    "green",
+                    {
+                        additionalCost: {
+                            GBP: 1,
+                            EUR: 2,
+                            USD: 3.5
+                        },
+                        value: "yellow"
+                    }
+                ]
+            },
+                       propertiesToShowInCart: ["color"],
+            prices: { GBP: 70, EUR: 80, USD: 90 },
+            currency: "GBP",
+            imageSrc: "1-483x321.jpeg"
+        },
+        getProductLocalization: getDefaultLocalization("product", "en", {
+            ...iPadCaseLocalization,
+            //...iPadPropertiesWithAdditionalCostLocalization//
+        }),
+        getCheckoutButtonLocalization: getDefaultLocalization(
+            "checkoutButton",
+            "en",
+            iPadCaseLocalization
+        ),
+        getCartLocalization: getDefaultLocalization(
+            "cart",
+            "en",
+            iPadCaseLocalization
+        )
+    };
+   
+    addProduct = (key, product, currency) =>
+        void this.setState(
+            ({
+                products: { [key]: cartProduct = { quantity: 0 }, ...restOfProducts }
+            }) => ({
+                products: {
+                    ...restOfProducts,
+                    [key]: {
+                        ...product,
+                        quantity: product.quantity + cartProduct.quantity
+                    }
+                }
+            })
+        );
 
-class App extends React.Component {
+    generateProductKey = (id, properties) =>
+        `${id}/${Object.entries(properties).join("_")}`;
+
+    updateProduct = (key, updatedProduct) => void console.log(":)");
+
+    removeProduct = key => void console.log(":C");
+
     render() {
+
+   
+        const {
+            addProduct,
+            generateProductKey,
+            updateProduct,
+            removeProduct,
+            state
+        } = this;
+
+        const {
+            getProductLocalization,
+            getCheckoutButtonLocalization,
+            getCartLocalization,
+            products,
+            product
+        } = state;
+
+        const checkoutButtonElement = (
+            <CheckoutButtonComponent
+                grandTotal={500}
+                hidden={false}
+                checkoutURL="/to/my/checkout"
+                currency="GBP"
+                getLocalization={getCheckoutButtonLocalization}
+            />
+        );
         return (
-            <div className="App">
-                <h1>Dave's Groceries</h1>
-                <Banner />
-                <ItemList items={items} />
+            <div className="container">
+                <ProductComponent
+                    {...product}
+                    checkoutButton={checkoutButtonElement}
+                    onAddProduct={
+                        addProduct
+                        // Help product to get into the cart
+                    }
+                    generateProductKey={
+                        generateProductKey
+                        // create product key as you wish
+                    }
+                    getLocalization={getProductLocalization}
+                />
+
+                <CartComponent
+                    products={
+                        products
+                        // Provide your own product's Object(Look at Products)
+                    }
+                    onUpdateProduct={
+                        updateProduct
+                        // Update something
+                    }
+                    getLocalization={getCartLocalization}
+                    currency="GBP"
+                    onRemoveProduct={
+                        removeProduct
+                        // Remove something
+                    }
+                    checkoutButton={checkoutButtonElement}
+                    isCartEmpty={false}
+                    getLocalization={getCartLocalization}
+                />
             </div>
         );
     }
 }
+
 export default App;
